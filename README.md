@@ -1,8 +1,15 @@
 
-
-rails new graphql-api-mfa --api --database sqlite3 --skip-active-storage --skip-action-cable --skip-test
-
+#### Create Graphql API with Multi-Factor Authentication
+```
 rails new graphql-api-mfa --database sqlite3 --skip-action-mailbox --skip-action-text --skip-spring --webpack=react -T
+
+cd  graphql-api-mfa
+
+bundle add graphql
+
+rails generate graphql:install
+```
+
 
 
 #### Add Gems
