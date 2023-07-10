@@ -3,7 +3,7 @@
 ```
 rails new graphql-api-mfa --database sqlite3 --skip-action-mailbox --skip-action-text --skip-spring --webpack=react -T
 
-cd  graphql-api-mfa
+cd graphql-api-mfa
 
 bundle add graphql
 
@@ -16,7 +16,6 @@ rails generate graphql:install
 
 ```ruby
 gem 'bcrypt', "~> 3.1.7"
-gem 'graphql'
 
 group :development, :test do
   ...
@@ -30,7 +29,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'shoulda-matchers', '~> 5.0'
+id  gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
   gem 'database_cleaner-active_record', require: false
 end
@@ -58,6 +57,8 @@ Pry.config.theme = 'vividchalk'
 #Pry.config.theme = 'tomorrow-night'
 #Pry.config.theme = 'ocean'
 ```
+
+
 
 
 #### From this tutorial

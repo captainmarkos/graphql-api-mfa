@@ -49,10 +49,25 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'graphql'
+gem "graphiql-rails", group: :development
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-theme'
+  gem 'rubocop', require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'simplecov', require: false
+  gem 'database_cleaner-active_record', require: false
 end
 
 group :development do
@@ -66,4 +81,3 @@ group :development do
   # gem "spring"
 end
 
-gem "graphiql-rails", group: :development
