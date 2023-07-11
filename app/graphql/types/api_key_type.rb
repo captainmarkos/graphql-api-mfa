@@ -6,5 +6,6 @@ module Types
     field :token, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :status, String, null: true
   end
 end

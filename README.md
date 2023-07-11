@@ -1,5 +1,12 @@
 
-#### Create Graphql API with Multi-Factor Authentication
+#### Graphql API with Multi-Factor Authentication
+
+- Find an API User
+- Find all API Users
+- Revoke an API Key
+
+
+#### Create Application
 ```
 rails new graphql-api-mfa --database sqlite3 --skip-action-mailbox --skip-action-text --skip-spring --webpack=react -T
 
@@ -9,8 +16,6 @@ bundle add graphql
 
 rails generate graphql:install
 ```
-
-
 
 #### Add Gems
 
@@ -33,13 +38,6 @@ id  gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', require: false
   gem 'database_cleaner-active_record', require: false
 end
-```
-
-
-```
-bundle install
-
-bin/rails generate graphql:install
 ```
 
 
@@ -70,7 +68,7 @@ Use HTTP Headers
 }
 ```
 
-Queries
+#### Find an API User
 ```
 {
   apiUser(id: 1) {
@@ -100,13 +98,13 @@ Queries
 }
 ```
 
+#### Find all API Users
 ```
 {
   apiUsers {
     id
     email
     createdAt
-    updatedAt
   }
 }
 ```
@@ -117,7 +115,6 @@ Queries
     id
     email
     createdAt
-    updatedAt
     apiKeys {
       bearer {
         id
@@ -129,21 +126,35 @@ Queries
 }
 ```
 
+#### Mutations
+In the GraphQL Playground: http://127.0.0.1:3003/graphiql
 
-#### From this tutorial
+Use HTTP Headers
+```
+{
+  "Authorization": "Bearer cbe9748c3c7889b0d37a9c9ca0d83685"
+}
+```
 
-  https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/
+#### Revoke an API Key
+```
+mutation {
+  revokeApiKey(input: { params: { email: "foo@manchoo.com" } }) {
+    apiKey {
+      token
+      status
+    }
+  }
+}
+```
 
 
-#### GraphQL Ruby
+#### Resources
 
-https://graphql-ruby.org/
-
-
-#### More Links
-
-https://www.honeybadger.io/blog/graphql-apis-for-rails/
-https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api
+- [https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)(https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)
+- [https://graphql-ruby.org/](https://graphql-ruby.org/)
+- [https://www.honeybadger.io/blog/graphql-apis-for-rails/](https://www.honeybadger.io/blog/graphql-apis-for-rails/)
+- [https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
 
 
 #### GraphQL / REST Pros & Cons
