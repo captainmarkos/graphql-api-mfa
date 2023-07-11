@@ -20,7 +20,7 @@ module Types
     end
 
     def api_users
-      User.all
+      User.includes(:api_keys).all
     end
   end
 end
