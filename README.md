@@ -60,6 +60,51 @@ Pry.config.theme = 'vividchalk'
 
 
 
+#### Queries
+In the GraphQL Playground: http://127.0.0.1:3003/graphiql
+
+```
+{
+  apiUser(id: 1) {
+    id
+    email
+    createdAt
+    updatedAt
+  } 
+}
+```
+
+```
+{
+  apiUsers {
+    id
+    email
+    createdAt
+    updatedAt
+  }
+}
+```
+
+```
+{
+  apiUser(id: 1) {
+    id
+    email
+    createdAt
+    updatedAt
+    apiKeys {
+      bearer {
+        id
+        email
+      }
+      token
+    }
+  }
+}
+```
+
+
+
 
 #### From this tutorial
 
