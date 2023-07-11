@@ -63,6 +63,14 @@ Pry.config.theme = 'vividchalk'
 #### Queries
 In the GraphQL Playground: http://127.0.0.1:3003/graphiql
 
+Use HTTP Headers
+```
+{
+  "Authorization": "Bearer cbe9748c3c7889b0d37a9c9ca0d83685"
+}
+```
+
+Queries
 ```
 {
   apiUser(id: 1) {
@@ -71,17 +79,6 @@ In the GraphQL Playground: http://127.0.0.1:3003/graphiql
     createdAt
     updatedAt
   } 
-}
-```
-
-```
-{
-  apiUsers {
-    id
-    email
-    createdAt
-    updatedAt
-  }
 }
 ```
 
@@ -103,7 +100,34 @@ In the GraphQL Playground: http://127.0.0.1:3003/graphiql
 }
 ```
 
+```
+{
+  apiUsers {
+    id
+    email
+    createdAt
+    updatedAt
+  }
+}
+```
 
+```
+{
+  apiUsers {
+    id
+    email
+    createdAt
+    updatedAt
+    apiKeys {
+      bearer {
+        id
+        email
+      }
+      token
+    }
+  }
+}
+```
 
 
 #### From this tutorial

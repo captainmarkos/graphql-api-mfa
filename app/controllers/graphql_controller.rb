@@ -4,7 +4,13 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
 
+  include ApiKeyAuthenticatable
+
+  prepend_before_action :authenticate_with_api_key, only: [:execute]
+
   def execute
+    return render json: { error: ACCESS_DENIED }, status: 401 unless current_bearer
+
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
