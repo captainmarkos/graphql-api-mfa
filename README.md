@@ -148,6 +148,20 @@ mutation {
 }
 ```
 
+#### Create a One Time Password
+```
+mutation {
+  createOtp(input: { params: { email: "foo@manchoo.com", password: "topsecret" } }) {
+    oneTimePassword {
+      id
+      enabled
+      user {
+        email
+      }
+    }
+  }
+}
+```
 
 #### Resources
 

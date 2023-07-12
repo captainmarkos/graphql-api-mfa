@@ -6,6 +6,6 @@ module Types
     field :password_digest, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :api_keys, [Types::ApiKeyType]
+    field :api_keys, [Types::ApiKeyType], null: true
   end
 end
