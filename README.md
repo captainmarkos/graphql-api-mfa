@@ -68,14 +68,12 @@ Use HTTP Headers
 }
 ```
 
-#### Find an API User
+#### Find API User by ID
 ```
 {
   apiUser(id: 1) {
     id
     email
-    createdAt
-    updatedAt
   } 
 }
 ```
@@ -127,6 +125,7 @@ Use HTTP Headers
 ```
 
 #### Mutations
+
 In the GraphQL Playground: http://127.0.0.1:3003/graphiql
 
 Use HTTP Headers
@@ -136,7 +135,9 @@ Use HTTP Headers
 }
 ```
 
+
 #### Revoke an API Key
+
 ```
 mutation {
   revokeApiKey(input: { params: { email: "foo@manchoo.com" } }) {
@@ -148,20 +149,26 @@ mutation {
 }
 ```
 
-#### Create a One Time Password
+
+#### Verify / Authenticate User
+
+Supported auth methods:
+- password
+- one time password (otp)
+- time-based one time password (totp) - UNDER DEVELOPMENT
+
 ```
 mutation {
-  createOtp(input: { params: { email: "foo@manchoo.com", password: "topsecret" } }) {
-    oneTimePassword {
+  verifyUser(input: { params: { email: "foo@manchoo.com", password: "topsecret" otp: "yeehaw"} }) {
+    authenticate {
       id
-      enabled
-      user {
-        email
-      }
+      email
     }
   }
 }
+
 ```
+
 
 #### Resources
 
