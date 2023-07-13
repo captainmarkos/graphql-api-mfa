@@ -172,14 +172,19 @@ mutation {
 
 #### Resources
 
-- [https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)(https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)
-- [https://graphql-ruby.org/](https://graphql-ruby.org/)
-- [https://www.honeybadger.io/blog/graphql-apis-for-rails/](https://www.honeybadger.io/blog/graphql-apis-for-rails/)
-- [https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
+GraphQL
+
+- [using-graphql-with-ruby-on-rails)(https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)
+- [graphql-ruby.org](https://graphql-ruby.org/)
+- [graphql-apis-for-rails](https://www.honeybadger.io/blog/graphql-apis-for-rails/)
+- [how-to-set-up-a-ruby-on-rails-graphql-api](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
+
+Other Tech Resources
+
+- [how-to-implement-decorator-pattern-in-ruby-on-rails-7](https://dev.to/vladhilko/how-to-implement-decorator-pattern-in-ruby-on-rails-7ji)
 
 
 #### GraphQL / REST Pros & Cons
-
 
 - REST Pros
   - accept diverse data formats (ex: json, xml)

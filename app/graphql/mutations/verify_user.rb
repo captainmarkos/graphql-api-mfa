@@ -30,7 +30,7 @@ module Mutations
     def reset_one_time_password(user)
       return unless user.otp_enabled?
 
-      user.one_time_passwords.enabled.update_all(enabled: false)
+      user.one_time_passwords.destroy_all
 
       OneTimePassword.create!(user: user, enabled: true)
     end
