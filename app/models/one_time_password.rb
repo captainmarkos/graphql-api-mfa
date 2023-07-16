@@ -1,5 +1,5 @@
 class OneTimePassword < ApplicationRecord
-  OTP_ISSUER = 'keygen.example'
+  OTP_ISSUER = 'Calypso'
 
   belongs_to :user
 
@@ -8,6 +8,8 @@ class OneTimePassword < ApplicationRecord
   validates :user, presence: true
 
   scope :enabled, -> { where(enabled: true) }
+  scope :active, -> { enabled.first }
+  scope :recent, -> { order(created_at: :desc).first }
 
   def verify_with_otp(otp)
     totp = ROTP::TOTP.new(otp_secret, issuer: OTP_ISSUER)

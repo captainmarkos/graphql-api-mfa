@@ -4,9 +4,10 @@ module Mutations
 
     field :authenticate, Types::ApiUserType, null: true
 
+    # TODO: this should be a query and not a mutation
     def resolve(params:)
       mutation_params = Hash params
-      user = User.find_by(email: mutation_params[:email])
+      user = User.includes(:config).find_by(email: mutation_params[:email])
 
       if user.present?
         result = if user.otp_enabled?
@@ -17,22 +18,10 @@ module Mutations
           user.authenticate(mutation_params[:password])
         end
 
-        reset_one_time_password(user) if result.present?
-
         { authenticate: result.present? ? result.as_json : nil }
       end
     rescue StandardError => e
       graphql_execution_error(e)
-    end
-
-    private
-
-    def reset_one_time_password(user)
-      return unless user.otp_enabled?
-
-      user.one_time_passwords.destroy_all
-
-      OneTimePassword.create!(user: user, enabled: true)
     end
   end
 end

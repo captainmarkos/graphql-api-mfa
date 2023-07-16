@@ -136,6 +136,23 @@ Use HTTP Headers
 ```
 
 
+#### User Config Admin
+
+Use this mutation to enable / disable user config fields.
+```
+mutation {
+  userConfigAdmin(input: { params: { email: "foo@manchoo.com", otpEnabled: true } }) {
+    attributes {
+      otpEnabled
+      user {
+        email
+      }
+    }
+  }
+}
+```
+
+
 #### Revoke an API Key
 
 ```
