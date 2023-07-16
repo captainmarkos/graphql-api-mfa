@@ -18,6 +18,7 @@ class User < ApplicationRecord
     return false unless otp_enabled?
 
     target = one_time_passwords.enabled.first
+    return false if target.nil?
 
     target.verify_with_otp(otp)
   end
