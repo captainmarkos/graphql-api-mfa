@@ -17,7 +17,7 @@ class User < ApplicationRecord
   def authenticate_with_otp(otp:)
     return false unless otp_enabled?
 
-    target = one_time_passwords.active
+    target = one_time_passwords.enabled.first
 
     target.verify_with_otp(otp)
   end
