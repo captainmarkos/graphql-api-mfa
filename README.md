@@ -9,8 +9,8 @@
 - [Mutations](#mutations)
   - [User Config Management](#user-config-management)
   - [Revoke an API Key](#revoke-an-api-key)
-  - [Verify / Authenticate User](#verify-/-authenticate-user)
-- [GraphQL / REST Pros & Cons](#graphql-/-rest-pros-&-cons)
+  - [Verify / Authenticate User](#verify--authenticate-user)
+- [GraphQL / REST Pros & Cons](#graphql--rest-pros--cons)
 - [Application Creation Notes](#application-creation-notes)
 - [Development Resources](#development-resources)
 
