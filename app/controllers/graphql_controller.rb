@@ -4,9 +4,9 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
 
-  include ApiKeyAuthenticatable
+  include ApiAuthenticator
 
-  prepend_before_action :authenticate_with_api_key, only: [:execute]
+  prepend_before_action :authenticate_for_query, only: [:execute]
 
   def execute
     return render json: { error: ACCESS_DENIED }, status: 401 unless current_bearer
@@ -61,5 +61,21 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def api_key_required?
+    # If we find that other queries do not require an api key then
+    # perhaps consider a different way.  For now this works.
+    !params[:query].match?(/\s*mutation.+\s*verifyUser/) &&
+    !params[:query].match?(/\s*query\s+IntrospectionQuery/)
+  end
+
+  def authenticate_for_query
+    if api_key_required?
+      authenticate_with_api_key
+    else
+      authenticate_with_basic_auth
+      authenticate_with_api_key if current_bearer.blank?
+    end
   end
 end

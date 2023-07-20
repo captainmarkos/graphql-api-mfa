@@ -1,25 +1,21 @@
 module Mutations
   class VerifyUser < Mutations::BaseMutation
-    argument :params, Types::Input::ApiUserInputType, required: true
+    argument :params, Types::Input::VerifyUserInputType, required: true
 
-    field :authenticate, Types::ApiUserType, null: true
+    field :verified, Types::ApiUserType, null: true
 
-    # TODO: this should be a query and not a mutation
+    # This mutation is only executed if authenticated by Basic Auth
+    # in the GraphqlController.  If the user is authenticated and
+    # has no api key then one is created.
     def resolve(params:)
       mutation_params = Hash params
-      user = User.includes(:config).find_by(email: mutation_params[:email])
+      user = context[:current_bearer]
 
-      if user.present?
-        result = if user.otp_enabled?
-          # verify user with one time password
-          user.authenticate_with_otp(otp: mutation_params[:otp])        
-        else
-          # verify user with password
-          user.authenticate(mutation_params[:password])
-        end
-
-        { authenticate: result.present? ? result.as_json : nil }
+      result = if user.present? && user.otp_enabled?
+        user.authenticate_with_otp(otp: mutation_params[:otp])
       end
+
+      { verified: result.present? ? result.as_json : nil }
     rescue StandardError => e
       graphql_execution_error(e)
     end
