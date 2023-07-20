@@ -246,7 +246,7 @@ Pry.config.theme = 'vividchalk'
 
 GraphQL
 
-- [using-graphql-with-ruby-on-rails)(https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)
+- [using-graphql-with-ruby-on-rails](https://www.apollographql.com/blog/community/backend/using-graphql-with-ruby-on-rails/)
 - [graphql-ruby.org](https://graphql-ruby.org/)
 - [graphql-apis-for-rails](https://www.honeybadger.io/blog/graphql-apis-for-rails/)
 - [how-to-set-up-a-ruby-on-rails-graphql-api](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
