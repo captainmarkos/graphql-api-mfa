@@ -7,5 +7,6 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :api_keys, [Types::ApiKeyType], null: true
+    field :system_message, String, null: false
   end
 end

@@ -1,5 +1,5 @@
 module Mutations
-  class VerifyUser < Mutations::BaseMutation
+  class UserVerifyOtp < Mutations::BaseMutation
     argument :params, Types::Input::UserAuthInputType, required: true
 
     field :verified, Types::ApiUserType, null: true

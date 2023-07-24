@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   after_create :create_config
 
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, on: :update
 
   def otp_enabled?
     config.otp_enabled?
