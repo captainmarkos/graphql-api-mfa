@@ -7,6 +7,7 @@
   - [Find API User By ID](#find-api-user-by-id)
   - [Find all API Users](#find-all-api-users)
 - [Mutations](#mutations)
+  - [User Create](#user-create)
   - [User Config Management](#user-config-management)
   - [Revoke an API Key](#revoke-an-api-key)
   - [Verify / Authenticate User](#verify--authenticate-user)
@@ -56,15 +57,6 @@ In the GraphQL Playground: http://127.0.0.1:3003/graphiql
   apiUser(id: 1) {
     id
     email
-  } 
-}
-```
-
-```
-{
-  apiUser(id: 1) {
-    id
-    email
     createdAt
     updatedAt
     apiKeys {
@@ -77,6 +69,19 @@ In the GraphQL Playground: http://127.0.0.1:3003/graphiql
   }
 }
 ```
+
+
+#### Find API User By Email
+```
+{
+  apiUser(email: "hazb@manchoo.com") {
+    id
+    email
+    activeToken
+  }
+}
+```
+
 
 #### Find all API Users
 ```
@@ -109,6 +114,31 @@ In the GraphQL Playground: http://127.0.0.1:3003/graphiql
 #### Mutations
 
 In the GraphQL Playground: http://127.0.0.1:3003/graphiql
+
+
+#### User Create
+
+Create a user with email and password.  Optional param `create_api_key` is `false` by default.  Set to `true` and an api key will be created after the new user is created.
+```
+mutation {
+  userCreate(input: {
+    params: {
+      email: "hazb@manchoo.com",
+      password: "topsecret",
+      createApiKey: true
+    }
+  }) {
+    user {
+      id
+      email
+      systemMessage
+      apiKeys {
+        token
+      }
+    }
+  }
+}
+```
 
 
 #### User Config Management

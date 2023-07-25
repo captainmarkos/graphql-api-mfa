@@ -8,21 +8,42 @@ module Mutations
     # to make this request then a new user can be created.
     def resolve(params:)
       mutation_params = Hash params
-
-      user = User.find_by(email: mutation_params[:email])
+      sys_msg = []
+      user = User.includes(:api_keys).find_by(email: mutation_params[:email])
 
       if user.present?
-        { user: user.as_json.merge(system_message: 'user already existed') }
+        sys_msg << 'user already existed'
+        sys_msg << 'api key created' if create_api_key(user, mutation_params)
       else
         new_user = User.create(
           email: mutation_params[:email],
           password: mutation_params[:password]
         )
 
-        { user: new_user.as_json.merge(system_message: 'user created') }
+        sys_msg << 'user created'
+        sys_msg << 'api key created' if create_api_key(new_user, mutation_params)
       end
+
+      { user: hashified(user: user, sys_msg: sys_msg) }
     rescue StandardError => e
       graphql_execution_error(e)
+    end
+
+    private
+
+    def hashified(user:, sys_msg: [])
+      user.as_json.merge({
+        active_token: user.api_keys.newest.try(:token),
+        api_keys: user.api_keys.newest.as_json,
+        system_message: sys_msg.compact.join(',')
+      })
+    end
+
+    def create_api_key(user, mutation_params)
+      # create an api key for the user if allowed
+      if mutation_params[:create_api_key].present? && user.api_keys.blank?
+        user.api_keys.new.save
+      end
     end
   end
 end

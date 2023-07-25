@@ -9,14 +9,19 @@ module Types
 
     # describe field signatures
     field :api_user, ApiUserType, 'Find api user by id' do
-      argument :id, ID
+      argument :id, ID, required: false
+      argument :email, String, required: false
     end
 
     field :api_users, [Types::ApiUserType], null: false, description: 'Return a list of api users'
 
     # provide implementations
-    def api_user(id:)
-      User.includes(:api_keys).find_by(id: id)
+    def api_user(id: nil, email:)
+      if id.present?
+        User.includes(:api_keys).find_by(id: id)
+      elsif email.present?
+        User.includes(:api_keys).find_by(email: email)
+      end
     end
 
     def api_users
