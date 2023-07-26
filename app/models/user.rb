@@ -10,14 +10,10 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true, on: :update
 
-  def otp_enabled?
-    config.otp_enabled?
-  end
-
   def authenticate_with_otp(otp:)
-    return false unless otp_enabled?
+    return false unless config.otp_enabled?
 
-    target = one_time_passwords.enabled.first
+    target = one_time_passwords.newest
     return false if target.nil?
 
     target.verify_with_otp(otp)

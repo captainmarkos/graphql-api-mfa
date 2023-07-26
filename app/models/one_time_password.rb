@@ -7,12 +7,15 @@ class OneTimePassword < ApplicationRecord
 
   validates :user, presence: true
 
-  scope :enabled, -> { where(enabled: true) }
-  scope :recent, -> { order(created_at: :desc).first }
+  scope :newest, -> { order(created_at: :desc).first }
+
+  def otp
+    totp = ROTP::TOTP.new(otp_secret, issuer: OTP_ISSUER)
+    totp.now
+  end
 
   def verify_with_otp(otp)
     totp = ROTP::TOTP.new(otp_secret, issuer: OTP_ISSUER)
-
     totp.verify(otp.to_s)
   end
 
