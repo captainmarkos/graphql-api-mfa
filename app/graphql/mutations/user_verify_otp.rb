@@ -11,7 +11,7 @@ module Mutations
       mutation_params = Hash params
       user = context[:current_bearer]
 
-      result = if user.present? && user.otp_enabled?
+      result = if user.present? && user.config.otp_enabled?
         user.authenticate_with_otp(otp: mutation_params[:otp])
       end
 

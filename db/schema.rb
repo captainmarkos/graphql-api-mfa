@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_182751) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_193108) do
   create_table "api_keys", force: :cascade do |t|
     t.string "bearer_type"
     t.integer "bearer_id"
@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_182751) do
   create_table "one_time_passwords", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "otp_secret", null: false
-    t.boolean "enabled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["otp_secret"], name: "index_one_time_passwords_on_otp_secret", unique: true

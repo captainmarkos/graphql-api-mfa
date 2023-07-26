@@ -9,6 +9,7 @@
 - [Mutations](#mutations)
   - [User Create](#user-create)
   - [User Config Management](#user-config-management)
+  - [User Request OTP](#user-request-otp)
   - [Revoke an API Key](#revoke-an-api-key)
   - [Verify / Authenticate User](#verify--authenticate-user)
 - [GraphQL / REST Pros & Cons](#graphql--rest-pros--cons)
@@ -157,6 +158,21 @@ mutation {
 }
 ```
 
+#### User Request OTP
+The bearer token used for this request must belong to the user's email provided.
+
+```
+mutation {
+  userRequestOtp(input: {
+    params: {
+      email: "hazb@manchoo.com"
+    }
+  }) {
+    otp
+  }
+}
+```
+
 
 #### Revoke an API Key
 
@@ -280,6 +296,7 @@ GraphQL
 - [graphql-ruby.org](https://graphql-ruby.org/)
 - [graphql-apis-for-rails](https://www.honeybadger.io/blog/graphql-apis-for-rails/)
 - [how-to-set-up-a-ruby-on-rails-graphql-api](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-graphql-api)
+- [graphql-ruby.org/fields/introduction.html#field-parameter-default-values](https://graphql-ruby.org/fields/introduction.html#field-parameter-default-values)
 
 Other Tech Resources
 
