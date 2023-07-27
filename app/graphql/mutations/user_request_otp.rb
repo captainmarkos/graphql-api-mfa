@@ -21,9 +21,7 @@ module Mutations
 
     def valid_conditions?(user, mutation_params)
       # We need to make sure user.email is the same as the email in params.
-      user.present? && 
-        mutation_params[:email].present? && 
-        user.email == mutation_params[:email]
+      user.present? && user.email == mutation_params[:email]
     end
   end
 end
